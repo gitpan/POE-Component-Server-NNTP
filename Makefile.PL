@@ -1,0 +1,10 @@
+use inc::Module::Install;
+name 'POE-Component-Server-NNTP';
+author 'Chris Williams <chris@bingosnet.co.uk>';
+license 'perl';
+version_from 'lib/POE/Component/Server/NNTP.pm';
+requires 'Socket' => 0;
+requires 'POE' => 0.38;
+requires 'POE::Component::Pluggable' => 0;
+requires 'POE::Component::Client::NNTP' => 1.05;
+WriteAll();
