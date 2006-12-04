@@ -7,7 +7,7 @@ use POE::Component::Pluggable::Constants qw(:ALL);
 use Socket;
 use vars qw($VERSION);
 
-$VERSION = '0.95';
+$VERSION = '0.96';
 
 sub spawn {
   my $package = shift;
