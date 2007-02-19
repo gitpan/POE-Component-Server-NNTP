@@ -25,3 +25,4 @@ t/07_handle_connects.t
 t/08_extra_cmds.t
 t/99_pod.t
 t/99_pod_coverage.t
+t/99_test_kwalitee.t
