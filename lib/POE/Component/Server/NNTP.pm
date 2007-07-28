@@ -7,7 +7,7 @@ use POE::Component::Pluggable::Constants qw(:ALL);
 use Socket;
 use vars qw($VERSION);
 
-$VERSION = '0.97';
+$VERSION = '0.98';
 
 sub spawn {
   my $package = shift;
@@ -352,7 +352,7 @@ __END__
 
 =head1 NAME
 
-POE::Component::Server::NNTP - A component that provides NNTP server functionality.
+POE::Component::Server::NNTP - A POE component that provides NNTP server functionality.
 
 =head1 SYNOPSIS
 
