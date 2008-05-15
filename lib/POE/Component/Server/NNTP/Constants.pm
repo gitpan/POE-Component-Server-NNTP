@@ -1,14 +1,15 @@
 package POE::Component::Server::NNTP::Constants;
 
+require Exporter;
+@ISA = qw( Exporter );
+%EXPORT_TAGS = ( 'ALL' => [ qw( NNTPD_EAT_NONE NNTPD_EAT_CLIENT NNTPD_EAT_PLUGIN NNTPD_EAT_ALL ) ] );
+Exporter::export_ok_tags( 'ALL' );
+
 use strict;
+use warnings;
 use vars qw($VERSION);
 
-$VERSION = '0.01';
-
-require Exporter;
-our @ISA = qw( Exporter );
-our %EXPORT_TAGS = ( 'ALL' => [ qw( NNTPD_EAT_NONE NNTPD_EAT_CLIENT NNTPD_EAT_PLUGIN NNTPD_EAT_ALL ) ] );
-Exporter::export_ok_tags( 'ALL' );
+$VERSION = '1.00';
 
 # Our constants
 sub NNTPD_EAT_NONE	() { 1 }
@@ -56,6 +57,12 @@ Value: 4
 =head1 MAINTAINER
 
 Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+
+=head1 LICENSE
+
+Copyright L<(c)> Chris Williams
+
+This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
 =head1 SEE ALSO
 

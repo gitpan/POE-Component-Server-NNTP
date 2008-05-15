@@ -1,4 +1,4 @@
-use Test::More tests => 19;
+use Test::More tests => 18;
 
 {
   package TestPlugin;

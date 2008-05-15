@@ -1,4 +1,4 @@
-use Test::More tests => 9;
+use Test::More tests => 7;
 
 use strict;
 use POE;
@@ -6,7 +6,7 @@ use_ok('POE::Component::Server::NNTP');
 
 POE::Session->create(
 	package_states => [
-	  'main' => [ qw(_start _stop _child _time_out nntpd_registered) ],
+	  'main' => [ qw(_start _stop _time_out nntpd_registered) ],
 	],
 	options => { trace => 0 },
 );
@@ -16,7 +16,7 @@ exit 0;
 
 sub _start {
   my $kernel = $_[KERNEL];
-  my $pbobj = POE::Component::Server::NNTP->spawn();
+  my $pbobj = POE::Component::Server::NNTP->spawn( port => 0, options => { trace => 0 } );
   isa_ok( $pbobj, 'POE::Component::Server::NNTP' );
   isa_ok( $pbobj, 'POE::Component::Pluggable' );
   pass('started');
@@ -51,5 +51,7 @@ sub nntpd_registered {
   my ($kernel,$pbobj) = @_[KERNEL,ARG0];
   isa_ok( $pbobj, 'POE::Component::Server::NNTP' );
   isa_ok( $pbobj, 'POE::Component::Pluggable' );
+  $kernel->post( $_[SENDER], 'shutdown' );
+  $kernel->delay( '_time_out' );
   return;
 }

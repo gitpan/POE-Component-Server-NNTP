@@ -1,13 +1,14 @@
 package POE::Component::Server::NNTP;
 
 use strict;
-use POE qw(Component::Client::NNTP Wheel::ReadWrite Filter::Line);
+use warnings;
+use POE qw(Component::Client::NNTP Wheel::SocketFactory Wheel::ReadWrite Filter::Line);
 use base qw(POE::Component::Pluggable);
 use POE::Component::Pluggable::Constants qw(:ALL);
 use Socket;
 use vars qw($VERSION);
 
-$VERSION = '0.99';
+$VERSION = '1.00';
 
 sub spawn {
   my $package = shift;
@@ -70,8 +71,10 @@ sub _start {
     my $sender_id = $sender->ID;
     $self->{events}->{'nntpd_all'}->{$sender_id} = $sender_id;
     $self->{sessions}->{$sender_id}->{'ref'} = $sender_id;
+    $self->{sessions}->{$sender_id}->{'refcnt'}++;
     $kernel->refcount_increment($sender_id, __PACKAGE__);
     $kernel->post( $sender, 'nntpd_registered', $self );
+    $kernel->detach_myself();
   }
 
   $self->{filter} = POE::Filter::Line->new();
@@ -527,6 +530,8 @@ complete NNTP daemon implementation.
 Takes a number of optional arguments:
 
   'alias', set an alias on the component;
+  'address', bind the component to a particular address, defaults to INADDR_ANY;
+  'port', start the listening server on a different port, defaults to 119;
   'options', a hashref of POE::Session options;
   'posting', a true or false value that determines whether the poco
 	     responds with a 200 or 201 to clients;
@@ -845,6 +850,12 @@ The basic anatomy of a plugin is:
 =head1 AUTHOR
 
 Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
+
+=head1 LICENSE
+
+Copyright L<(c)> Chris Williams
+
+This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
 =head1 SEE ALSO
 
