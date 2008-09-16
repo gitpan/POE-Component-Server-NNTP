@@ -8,7 +8,7 @@ use POE::Component::Pluggable::Constants qw(:ALL);
 use Socket;
 use vars qw($VERSION);
 
-$VERSION = '1.00';
+$VERSION = '1.02';
 
 sub spawn {
   my $package = shift;
@@ -344,7 +344,7 @@ sub NNTPC_response {
   my $id = $_[0];
   my $text = ${ $_[1] };
   my ($code) = $text =~ /^\s*(\d{3,3})\s*/;
-  return 1 unless $code and $code eq '340' or $code eq '335';
+  return 1 unless $code && ( $code eq '340' || $code eq '335' );
   $self->{clients}->{ $id }->{post_code} = $code;
   $self->{clients}->{ $id }->{post_buffer} = [ ];
   return 1;

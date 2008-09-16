@@ -1,6 +1,9 @@
 POE::Component::Server::NNTP
 ============================
 
+1.02	Tue Sep 16 16:48:22 BST 2008
+	- Small bug squashed, spotted by Dave Golden.
+
 1.00	Thu May 15 13:32:24 BST 2008
 	- Added license information
 	- detach_myself if we are a child session
