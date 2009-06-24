@@ -3,9 +3,12 @@ abstract: 'A POE component that provides NNTP server functionality.'
 author:
   - 'Chris Williams <chris@bingosnet.co.uk>'
 build_requires:
+  ExtUtils::MakeMaker: 6.42
   Test::More: 0.47
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.77'
+generated_by: 'Module::Install version 0.91'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -13,9 +16,16 @@ meta-spec:
 name: POE-Component-Server-NNTP
 no_index:
   directory:
+    - examples
     - inc
     - t
-    - examples
+provides:
+  POE::Component::Server::NNTP:
+    file: lib/POE/Component/Server/NNTP.pm
+    version: 1.04
+  POE::Component::Server::NNTP::Constants:
+    file: lib/POE/Component/Server/NNTP/Constants.pm
+    version: 1.04
 requires:
   POE: 0.38
   POE::Component::Client::NNTP: 1.05
@@ -23,8 +33,9 @@ requires:
   POE::Filter::Line: 0
   POE::Wheel::ReadWrite: 0
   POE::Wheel::SocketFactory: 0
-  Socket: 0
   perl: 5.6.0
 resources:
+  homepage: http://github.com/bingos/poe-component-server-nntp/tree
   license: http://dev.perl.org/licenses/
-version: 1.02
+  repository: git://github.com/bingos/poe-component-server-nntp.git
+version: 1.04
